@@ -1,6 +1,8 @@
 package config
 
 import (
+	"time"
+
 	"github.com/caarlos0/env/v9"
 	"github.com/xssnick/tonutils-go/ton/wallet"
 )
@@ -14,6 +16,8 @@ type config struct {
 	DatabaseURI          string         `env:"DB_URI,required"`
 	APIPort              string         `env:"API_PORT,required"`
 	AdminToken           string         `env:"ADMIN_TOKEN,required"`
+	BlockTTL             time.Duration  `env:"BLOCK_TTL,default=10s"`
+	LogOutputPath        string         `env:"LOG_OUTPUT_PATH,required"`
 }
 
 func init() {
