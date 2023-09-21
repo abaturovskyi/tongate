@@ -11,7 +11,7 @@ import (
 )
 
 type Handler struct {
-	AddressUsecases usecases.AddressUsecases
+	AddressUsecase usecases.AddressUsecase
 }
 
 func NewHandler() *Handler {
@@ -31,7 +31,7 @@ func (h *Handler) createAddress(w http.ResponseWriter, req bunrouter.Request) er
 		return err
 	}
 
-	addr, err := h.AddressUsecases.CreateAddress(req.Context(), data.UserID, data.Currency)
+	addr, err := h.AddressUsecase.CreateAddress(req.Context(), data.UserID, data.Currency)
 	if err != nil {
 		writeHttpError(w, http.StatusInternalServerError, fmt.Sprintf("generate address err: %v", err))
 		return nil

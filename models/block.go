@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/abaturovskyi/tongate/config"
+	"github.com/abaturovskyi/tongate/internal/config"
 	"github.com/xssnick/tonutils-go/ton"
 )
 

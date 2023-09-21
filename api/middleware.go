@@ -5,14 +5,13 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/abaturovskyi/tongate/config"
 	"github.com/uptrace/bunrouter"
 )
 
-func AuthMiddleware() bunrouter.MiddlewareFunc {
+func AuthMiddleware(adminToken string) bunrouter.MiddlewareFunc {
 	return func(next bunrouter.HandlerFunc) bunrouter.HandlerFunc {
 		return func(w http.ResponseWriter, req bunrouter.Request) error {
-			if !checkToken(req, config.Config.AdminToken) {
+			if !checkToken(req, adminToken) {
 				w.WriteHeader(http.StatusUnauthorized)
 				return nil
 			}

@@ -29,13 +29,12 @@ func (c *blockRepository) GetLastBlock(ctx context.Context) (*models.BlockHeader
 		    shard,
 		    root_hash,
 		    file_hash,
-				gen_utime
+			gen_utime
 		FROM payments.block_header
 		ORDER BY seqno DESC
 		LIMIT 1
-	`).Scan(
-		&block,
-	)
+	`).Scan(&block)
+
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, ErrNotFound
 	}

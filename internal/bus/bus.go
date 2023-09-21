@@ -16,7 +16,7 @@ var Bus *bus.Bus
 // Monoton is an instance of monoton.Monoton
 var Monoton monoton.Monoton
 
-// Init inits the bus config
+// InitBus inits the bus config
 func InitBus() {
 	// configure id generator (it doesn't have to be monoton)
 	node := uint64(1)

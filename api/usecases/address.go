@@ -4,9 +4,9 @@ import (
 	"context"
 )
 
-type AddressUsecases struct {
+type AddressUsecase struct {
 }
 
-func (u *AddressUsecases) CreateAddress(ctx context.Context, userID int64, currency string) (string, error) {
+func (u *AddressUsecase) CreateAddress(ctx context.Context, userID int64, currency string) (string, error) {
 	return "", nil
 }

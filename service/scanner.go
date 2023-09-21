@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/abaturovskyi/tongate/bus"
+	"github.com/abaturovskyi/tongate/internal/bus"
 	"github.com/abaturovskyi/tongate/models"
 	"github.com/xssnick/tonutils-go/tlb"
 	"github.com/xssnick/tonutils-go/ton"
@@ -23,7 +23,7 @@ type ShardScanner struct {
 	lastMasterBlock     *ton.BlockIDExt
 }
 
-// NewShardScanner creates new tracker to get blocks with specific shard attribute
+// NewShardScanner creates new tracker to get blocks with specific shard attribute.
 func NewShardScanner(
 	logger *zap.SugaredLogger,
 	shard byte,
@@ -39,7 +39,7 @@ func NewShardScanner(
 
 // Start scans for blocks.
 func (s *ShardScanner) Start(ctx context.Context, startBlock *ton.BlockIDExt) {
-	// the interval between blocks can be up to 40 seconds
+	// The interval between blocks can be up to 40 seconds.
 	ctx = s.tonApi.Client().StickyContext(ctx)
 	s.lastKnownShardBlock = startBlock
 
@@ -123,7 +123,10 @@ func (s *ShardScanner) handleShardBlocks(ctx context.Context, i *ton.BlockIDExt)
 			return err
 		}
 
-		bus.EmitEvent(bus.TopicBlockFound, &h)
+		if err := bus.EmitEvent(bus.TopicBlockFound, &h); err != nil {
+			return err
+		}
+
 		currentBlock = h.Parent
 	}
 
