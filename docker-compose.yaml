@@ -3,20 +3,14 @@ version: '3'
 services:
   tongate-postgres:
     image: postgres:15
-    container_name: tongate_postgres
-    # volumes:
     ports:
       - "5432:5432"
     restart: always
-    env_file:
-      - .env
     environment:
-      POSTGRES_DB: "tongate_dev"
-      POSTGRES_USER: "docker"
+      POSTGRES_DB: tongate_dev
+      POSTGRES_USER: docker
       POSTGRES_PORT: 5432
       POSTGRES_PASSWORD: docker
-    # networks:
-    #   - p-network
 
   tongate-server:
     image: tongate-server
@@ -33,7 +27,3 @@ services:
       - .env
     environment:
       DB_URI: "postgres://docker:docker@tongate_postgres:5432/tongate_dev?sslmode=disable"
-
-# networks:
-#   p-network:
-#     driver: bridge
